@@ -29,4 +29,6 @@ public class FilterStepdefs {
     public void iCanEasilyFindTheTypeOfItemsIMInterestedIn() {
         Assertions.assertEquals(4,inventoryPage.getInventory());
     }
+
+
 }
