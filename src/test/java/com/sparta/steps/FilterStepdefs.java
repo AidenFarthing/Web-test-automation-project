@@ -15,6 +15,7 @@ public class FilterStepdefs {
     @Given("I am on the inventory page")
     public void iAmOnTheInventoryPage() {
         inventoryPage.open();
+        inventoryPage.dismissPopups();
 
     }
 
@@ -26,6 +27,6 @@ public class FilterStepdefs {
 
     @Then("I can easily find the type of items I'm interested in.")
     public void iCanEasilyFindTheTypeOfItemsIMInterestedIn() {
-        Assertions.assertEquals(3,inventoryPage.getInventory());
+        Assertions.assertEquals(4,inventoryPage.getInventory());
     }
 }
