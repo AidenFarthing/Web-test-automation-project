@@ -10,6 +10,9 @@ import org.openqa.selenium.WebElement;
 
 @DefaultUrl("https://automationexercise.com/")
 public class HomePage extends PageObject {
+    static {
+        io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
+    }
 
     // Navigation Link
     @FindBy(css = "a[href='/']")
