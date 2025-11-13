@@ -2,6 +2,7 @@ package com.sparta.steps;
 
 import com.sparta.pages.CartPage;
 import com.sparta.pages.HomePage;
+import com.sparta.pages.PaymentPage;
 import com.sparta.pages.ProductPage;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;

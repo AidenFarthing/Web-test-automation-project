@@ -1,6 +1,7 @@
 package com.sparta.steps;
 
 import com.sparta.pages.HomePage;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.*;
 import net.thucydides.core.annotations.Step;
 import org.junit.jupiter.api.Assertions;
