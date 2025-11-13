@@ -15,7 +15,7 @@ public class CartStepdefs  extends PageObject {
 
     @Given("I am on the products page")
     public void iAmOnTheProductsPage() {
-        homePage.open();
+        homePage.openHomePage();
         homePage.viewProduct();
     }
 
