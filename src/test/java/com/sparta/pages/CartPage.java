@@ -1,4 +1,4 @@
-package sparta.pages;
+package com.sparta.pages;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
