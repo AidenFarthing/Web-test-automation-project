@@ -12,6 +12,9 @@ public class ProductPage  extends PageObject {
     @FindBy(className = "fa-shopping-cart")
     private WebElementFacade cart;
 
+    @FindBy(id = "quantity")
+    private WebElementFacade quantity;
+
     @FindBy(className = "btn-success")
     private WebElementFacade continueShopping;
 
@@ -25,6 +28,10 @@ public class ProductPage  extends PageObject {
 
     public void clickOnCart() {
         cart.click();
+    }
+
+    public void increaseQuantity(String num) {
+        quantity.type(num);
     }
 
 }
