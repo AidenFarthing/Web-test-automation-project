@@ -1,4 +1,4 @@
-package sparta.pages;
+package com.sparta.pages;
 
 public class LoginPage {
 }
