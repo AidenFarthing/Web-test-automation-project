@@ -4,13 +4,9 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
-import net.thucydides.core.annotations.findby.By;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.util.List;
 
 @DefaultUrl("https://automationexercise.com/")
 public class HomePage extends PageObject {
@@ -40,6 +36,10 @@ public class HomePage extends PageObject {
     @FindBy(css = ".features_items")
     private WebElementFacade featuredItemsSection;
 
+    public void openHomePage() {
+        this.open();        // Call Serenity's built-in final method
+        dismissPopups();
+    }
 
     /** Navigate to the Products page */
     public void viewProduct() {
@@ -61,6 +61,38 @@ public class HomePage extends PageObject {
     public void openContactUs() {
         contactUsLink.click();
     }
+    public void dismissPopups() {
+
+        // REMOVE GOOGLE ADS IFRAMES
+        try {
+            getDriver().findElements(By.cssSelector("iframe[id^='aswift_']")).forEach(f -> {
+                try { evaluateJavascript("arguments[0].remove();", f); } catch (Exception ignored) {}
+            });
+        } catch (Exception ignored) {}
+
+        // REMOVE GOOGLE ADS HOST DIVS
+        try {
+            getDriver().findElements(By.cssSelector("div[id^='aswift_'][id$='_host']")).forEach(d -> {
+                try { evaluateJavascript("arguments[0].remove();", d); } catch (Exception ignored) {}
+            });
+        } catch (Exception ignored) {}
+
+        // DISMISS CONSENT POPUP
+        try {
+            WebElementFacade popup = find(By.cssSelector(".fc-consent-root"));
+            if (popup.isVisible()) {
+                try {
+                    WebElementFacade btn = popup.find(By.cssSelector("button.fc-button.fc-cta-consent.fc-primary-button"));
+                    if (btn.isVisible() && btn.isClickable()) btn.click();
+                    else evaluateJavascript("arguments[0].click();", btn);
+                } catch (Exception ignored) {}
+                try { evaluateJavascript("arguments[0].remove();", popup); } catch (Exception ignored) {}
+            }
+        } catch (Exception ignored) {}
+    }
+
+
+    //visibility tests
 
     public boolean isHomePageLoaded() {
         return slider.isVisible() && featuredItemsSection.isVisible();

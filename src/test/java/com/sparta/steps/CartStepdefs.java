@@ -25,7 +25,6 @@ public class CartStepdefs  extends PageObject {
     @Given("I am on the home page")
     public void iAmOnTheHomePage() {
         homePage.open();
-        cartPage.automationExercisePopup();
     }
 
     @When("I add an item to cart")
