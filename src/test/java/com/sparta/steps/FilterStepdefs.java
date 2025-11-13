@@ -1,12 +1,11 @@
-
+package com.sparta.steps;
 
 import com.sparta.pages.InventoryPage;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Managed;
-
+import org.junit.jupiter.api.Assertions;
 
 public class FilterStepdefs {
     @Managed

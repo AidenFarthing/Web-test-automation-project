@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-@DefaultUrl("https://automationexercise.com/products")
+@DefaultUrl("https://automationexercise.com/products/")
 
 
 public class InventoryPage extends PageObject {
