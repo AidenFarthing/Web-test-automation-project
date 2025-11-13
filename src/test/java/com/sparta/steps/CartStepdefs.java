@@ -22,14 +22,15 @@ public class CartStepdefs  extends PageObject {
     @Managed
     CartPage cartPage;
 
-    @Given("I am on the products page")
-    public void iAmOnTheProductsPage() {
+    @Given("I am on the home page")
+    public void iAmOnTheHomePage() {
         homePage.open();
-        homePage.viewProduct();
+        cartPage.automationExercisePopup();
     }
 
     @When("I add an item to cart")
     public void iAddAnItemToCart() {
+        homePage.viewProduct();
         productPage.clickAddToCartButton();
         productPage.clickContinueShopping();
     }
@@ -37,21 +38,24 @@ public class CartStepdefs  extends PageObject {
     @Then("there should an item in my cart")
     public void thereShouldAnItemInMyCart() {
         productPage.clickOnCart();
+        Assertions.assertEquals("1",cartPage.getCartQuantity());
 
     }
 
     @And("I have only one item in the cart")
     public void iHaveOnlyOneItemInTheCart() {
+        productPage.clickOnCart();
         Assertions.assertEquals("1",cartPage.getCartQuantity());
     }
 
-    @When("remove the item from cart")
+    @When("I remove the item from cart")
     public void removeTheItemFromCart() {
         cartPage.cartQuantityDelete();
     }
 
     @Then("there should no items in my cart")
     public void thereShouldNoItemsInMyCart() {
-        Assertions.assertEquals("Cart is empty!",cartPage.emptyCartMessage());
+        productPage.clickOnCart();
+        Assertions.assertEquals("Cart is empty! Click here to buy products.",cartPage.emptyCartMessage());
     }
 }
