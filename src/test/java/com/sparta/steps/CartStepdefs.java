@@ -1,6 +1,8 @@
 package com.sparta.steps;
 
+import com.sparta.pages.CartPage;
 import com.sparta.pages.HomePage;
+import com.sparta.pages.ProductPage;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -8,43 +10,51 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.pages.PageObject;
+import org.junit.jupiter.api.Assertions;
 
 public class CartStepdefs  extends PageObject {
     @Managed
     HomePage homePage;
 
-    @Given("I am on the products page")
-    public void iAmOnTheProductsPage() {
-        homePage.open();
-        homePage.viewProduct();
+    @Managed
+    ProductPage productPage;
+
+    @Managed
+    CartPage cartPage;
+
+    @Given("I am on the home page")
+    public void iAmOnTheHomePage() {
+        homePage.openHomePage();
     }
 
     @When("I add an item to cart")
     public void iAddAnItemToCart() {
-
+        homePage.viewProduct();
+        productPage.clickAddToCartButton();
+        productPage.clickContinueShopping();
     }
 
     @Then("there should an item in my cart")
     public void thereShouldAnItemInMyCart() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        productPage.clickOnCart();
+        Assertions.assertEquals("1",cartPage.getCartQuantity());
+
     }
 
     @And("I have only one item in the cart")
     public void iHaveOnlyOneItemInTheCart() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        productPage.clickOnCart();
+        Assertions.assertEquals("1",cartPage.getCartQuantity());
     }
 
-    @When("remove the item from cart")
+    @When("I remove the item from cart")
     public void removeTheItemFromCart() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        cartPage.cartQuantityDelete();
     }
 
     @Then("there should no items in my cart")
     public void thereShouldNoItemsInMyCart() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        productPage.clickOnCart();
+        Assertions.assertEquals("Cart is empty! Click here to buy products.",cartPage.emptyCartMessage());
     }
 }
