@@ -1,5 +1,6 @@
 package com.sparta.pages;
 
+import net.serenitybdd.core.pages.ClickStrategy;
 import net.serenitybdd.core.pages.ListOfWebElementFacades;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -26,6 +27,21 @@ public class InventoryPage extends PageObject {
     @FindBy(css="#Women li:nth-child(1) > a")
     private WebElementFacade dressFliter;
 
+    @FindBy(id="search_product")
+    private WebElementFacade searchField;
+
+    @FindBy(id="submit_search")
+    private WebElementFacade searchButton;
+
+
+
+
+    public void clickSearchField(){
+        searchField.type("frozen tops for kids");
+    }
+    public void clickSearchbutton(){
+        searchButton.click();
+    }
 
 
     public int getInventory(){
