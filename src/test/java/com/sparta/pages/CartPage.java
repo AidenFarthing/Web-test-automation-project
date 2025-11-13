@@ -35,27 +35,4 @@ public class CartPage  extends PageObject {
     public void cartQuantityDelete() {
         cartQuantityDelete.click();
     }
-
-    public void automationExercisePopup() {
-        getDriver().get("https://automationexercise.com/");
-
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-
-        // Try to find the consent button without throwing if it is not there
-        List<WebElement> consentButtons =
-                getDriver().findElements(By.cssSelector("button.fc-cta-consent"));
-
-        if (!consentButtons.isEmpty() && consentButtons.get(0).isDisplayed()) {
-            consentButtons.get(0).click();
-            System.out.println("Consent popup appeared – clicked Accept.");
-
-            // Optional: wait until popup disappears
-            wait.until(ExpectedConditions.invisibilityOf(consentButtons.get(0)));
-        } else {
-            System.out.println("Consent popup not present – continuing normally.");
-        }
-
-    }
-
-
 }
