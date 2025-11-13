@@ -7,4 +7,6 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.support.FindBy;
 
 public class CartPage  extends PageObject {
+
+
 }
