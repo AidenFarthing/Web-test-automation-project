@@ -30,3 +30,4 @@ Feature: Cart
   When I remove the items from cart
   Then there should be no items in my cart
 
+
