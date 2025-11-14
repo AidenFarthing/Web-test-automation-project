@@ -39,11 +39,15 @@ public class CartStepdefs  extends PageObject {
     public void thereShouldAnItemInMyCart() {
         productPage.clickOnCart();
         Assertions.assertEquals("1",cartPage.getCartQuantity());
+        cartPage.cartQuantityDelete();
 
     }
 
     @And("I have only one item in the cart")
     public void iHaveOnlyOneItemInTheCart() {
+        homePage.viewProduct();
+        productPage.clickAddToCartButton();
+        productPage.clickContinueShopping();
         productPage.clickOnCart();
         Assertions.assertEquals("1",cartPage.getCartQuantity());
     }
@@ -71,10 +75,15 @@ public class CartStepdefs  extends PageObject {
     public void thereShouldOfThatItemInMyCart(int arg0) {
         productPage.clickOnCart();
         Assertions.assertEquals("2",cartPage.getCartQuantity());
+        cartPage.cartQuantityDelete();
     }
 
     @And("I have only two items in the cart")
     public void iHaveOnlyTwoItemsInTheCart() {
+        homePage.viewProduct();
+        productPage.increaseQuantity("2");
+        productPage.clickAddToCartButton();
+        productPage.clickContinueShopping();
         productPage.clickOnCart();
         Assertions.assertEquals("2",cartPage.getCartQuantity());
     }

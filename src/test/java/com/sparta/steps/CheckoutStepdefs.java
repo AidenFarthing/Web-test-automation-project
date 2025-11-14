@@ -41,6 +41,7 @@ public class CheckoutStepdefs {
     @Then("I should see confirmation of purchase")
     public void iShouldSeeConfirmationOfPurchase() {
         Assertions.assertEquals("ORDER PLACED!",paymentPage.getOrderPlacedMessage());
+        homePage.logout();
     }
 
     @And("I am logged in")
@@ -95,9 +96,6 @@ public class CheckoutStepdefs {
     @Given("I am on the home page and logged out")
     public void iAmOnTheHomePageAndLoggedOut() {
         homePage.openHomePage();
-        homePage.logout();
-        loginPage.clickHome();
-
     }
 
     @And("I click submit without filling details")
@@ -108,12 +106,12 @@ public class CheckoutStepdefs {
     @Then("I should not progress to the next page")
     public void iShouldNotProgressToTheNextPage() {
         assertThat(homePage.getDriver().getCurrentUrl(), containsString("/payment"));
+        homePage.logout();
     }
 
     @And("I log in")
     public void iLogIn() {
         homePage.openHomePage();
-        homePage.logout();
         loginPage.enterEmail("spartatester@gmail.com");
         loginPage.enterPassword("test");
         loginPage.clickLoginButton();
