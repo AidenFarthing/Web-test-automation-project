@@ -27,6 +27,9 @@ public class CartPage  extends PageObject {
     @FindBy(css = ".check_out")
     private WebElementFacade toCheckout;
 
+    @FindBy(partialLinkText = "Register")
+    private WebElementFacade toLogin;
+
     public String getCartQuantity() {
         return cartQuantity.getText();
     }
@@ -41,5 +44,9 @@ public class CartPage  extends PageObject {
 
     public void proceedToCheckout() {
         toCheckout.click();
+    }
+
+    public void toLogin() {
+        toLogin.click();
     }
 }

@@ -28,6 +28,9 @@ public class HomePage extends PageObject {
     @FindBy(css = "a[href='/login']")
     private WebElementFacade loginLink;
 
+    @FindBy(css = "a[href='/logout']")
+    private WebElementFacade logoutLink;
+
     @FindBy(css = "a[href='/contact_us']")
     private WebElementFacade contactUsLink;
 
@@ -61,6 +64,10 @@ public class HomePage extends PageObject {
 
     public void openLogin() {
         loginLink.click();
+    }
+
+    public void logout() {
+        logoutLink.click();
     }
 
     public void openContactUs() {

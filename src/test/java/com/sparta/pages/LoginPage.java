@@ -27,6 +27,9 @@ public class LoginPage extends PageObject {
     @FindBy(css = "p[style='color: red;']")
     private WebElementFacade errorMessage;
 
+    @FindBy(className = "fa-home")
+    private WebElementFacade home;
+
     public void enterEmail(String email) {
         emailField.type(email);
     }
@@ -97,6 +100,10 @@ public class LoginPage extends PageObject {
 
     public boolean isPasswordRequired() {
         return passwordField.getAttribute("required") != null;
+    }
+
+    public void clickHome() {
+        home.click();
     }
 
 

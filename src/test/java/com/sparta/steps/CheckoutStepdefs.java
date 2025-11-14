@@ -3,6 +3,7 @@ package com.sparta.steps;
 import com.sparta.pages.*;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Managed;
@@ -68,5 +69,31 @@ public class CheckoutStepdefs {
         paymentPage.enterCardExpiryMonth("01");
         paymentPage.enterCardExpiryYear("2030");
         paymentPage.submit();
+    }
+
+    @And("I click login")
+    public void iClickLogin() {
+        cartPage.toLogin();
+    }
+
+    @And("I login")
+    public void iLogin() {
+        loginPage.enterEmail("spartatester@gmail.com");
+        loginPage.enterPassword("test");
+        loginPage.clickLoginButton();
+    }
+
+    @When("I click proceed to checkout again")
+    public void iClickProceedToCheckoutAgain() {
+        homePage.openCart();
+        cartPage.proceedToCheckout();
+    }
+
+    @Given("I am on the home page and logged out")
+    public void iAmOnTheHomePageAndLoggedOut() {
+        homePage.openHomePage();
+        homePage.logout();
+        loginPage.clickHome();
+
     }
 }
