@@ -7,13 +7,13 @@ import org.openqa.selenium.By;
 
 public class SignupPage  extends PageObject {
 
-    @FindBy(css = ".signup-form", className = "name")
+    @FindBy(className = "name")
     private WebElementFacade signupName;
 
-    @FindBy(css = ".signup-form", className = "email")
+    @FindBy(className = "email")
     private WebElementFacade signupEmail;
 
-    @FindBy(css = ".signup-form", className = "btn")
+    @FindBy(className = "btn")
     private WebElementFacade submit;
 
 
