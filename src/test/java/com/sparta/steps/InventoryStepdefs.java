@@ -1,7 +1,9 @@
 package com.sparta.steps;
 
 
+import com.sparta.pages.CartPage;
 import com.sparta.pages.InventoryPage;
+import com.sparta.pages.ProductPage;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -13,6 +15,8 @@ import org.junit.jupiter.api.Assertions;
 public class InventoryStepdefs {
     @Managed
     InventoryPage inventoryPage;
+    ProductPage productPage;
+    CartPage cartPage;
 
     @Given("I am on the inventory page")
     public void iAmOnTheInventoryPage() {
@@ -65,5 +69,19 @@ public class InventoryStepdefs {
     @Then("I can easily find the type of T shrits I'm interested in.")
     public void iCanEasilyFindTheTypeOfTShritsIMInterestedIn() {
         Assertions.assertEquals(6, inventoryPage.getInventory());
+    }
+
+    @When("I click on a product to see its detailed information, including price, description, availability, and images.")
+    public void iClickOnAProductToSeeItsDetailedInformationIncludingPriceDescriptionAvailabilityAndImages() {
+        inventoryPage.detialedProductView();
+    }
+
+    @Then("Then I can make an informed decision before purchasing.")
+    public void thenICanMakeAnInformedDecisionBeforePurchasing() {
+        productPage.clickAddToCartButton();
+        productPage.clickContinueShopping();
+        productPage.clickOnCart();
+
+        Assertions.assertEquals("1",cartPage.getCartQuantity());
     }
 }
