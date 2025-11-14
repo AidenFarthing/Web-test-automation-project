@@ -59,7 +59,7 @@ public class InventoryPage extends PageObject {
         searchButton.click();
     }
     public void clickSearchFieldwithemptystring(){
-        searchField.type("");
+        searchField.type(" ");
     }
 
     public int getInventory(){
