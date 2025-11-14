@@ -9,6 +9,9 @@ import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Managed;
 import org.junit.jupiter.api.Assertions;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+
 public class CheckoutStepdefs {
     @Managed
     LoginPage loginPage;
@@ -95,5 +98,24 @@ public class CheckoutStepdefs {
         homePage.logout();
         loginPage.clickHome();
 
+    }
+
+    @And("I click submit without filling details")
+    public void iClickSubmitWithoutFillingDetails() {
+        paymentPage.submit();
+    }
+
+    @Then("I should not progress to the next page")
+    public void iShouldNotProgressToTheNextPage() {
+        assertThat(homePage.getDriver().getCurrentUrl(), containsString("/payment"));
+    }
+
+    @And("I log in")
+    public void iLogIn() {
+        homePage.openHomePage();
+        homePage.logout();
+        loginPage.enterEmail("spartatester@gmail.com");
+        loginPage.enterPassword("test");
+        loginPage.clickLoginButton();
     }
 }
