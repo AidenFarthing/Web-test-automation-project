@@ -5,6 +5,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 
@@ -46,6 +47,7 @@ public class HomePage extends PageObject {
 
     /** Navigate to the Products page */
     public void viewProduct() {
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", productLink);
         productLink.click();
     }
 

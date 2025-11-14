@@ -24,6 +24,9 @@ public class CartPage  extends PageObject {
     @FindBy(className = "text-center")
     private WebElementFacade textCenter;
 
+    @FindBy(css = ".check_out")
+    private WebElementFacade toCheckout;
+
     public String getCartQuantity() {
         return cartQuantity.getText();
     }
@@ -34,5 +37,9 @@ public class CartPage  extends PageObject {
 
     public void cartQuantityDelete() {
         cartQuantityDelete.click();
+    }
+
+    public void proceedToCheckout() {
+        toCheckout.click();
     }
 }
