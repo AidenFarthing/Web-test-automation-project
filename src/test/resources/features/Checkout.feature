@@ -29,7 +29,7 @@ Feature: Checkout
   @Sad
   Scenario: Checkout does not fill in details
     Given I am on the home page
-    And I log in
+    And I am logged in
     And have added an item to the cart
     When I click proceed to checkout
     And I click place order
