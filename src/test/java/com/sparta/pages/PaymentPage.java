@@ -2,6 +2,7 @@ package com.sparta.pages;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.pages.PageObject;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
 
 public class PaymentPage extends PageObject {
@@ -47,6 +48,7 @@ public class PaymentPage extends PageObject {
     }
 
     public void submit() {
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", submit);
         submit.click();
     }
 
