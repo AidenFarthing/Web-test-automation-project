@@ -18,7 +18,7 @@ import java.util.List;
 
 public class InventoryPage extends PageObject {
 
-    @FindBy(className = "col-sm-4")
+    @FindBy(className = "single-products")
     private List<WebElementFacade> inventoryItems;
 
     @FindBy(css=".panel:nth-child(1) > .panel-heading a")
@@ -33,8 +33,21 @@ public class InventoryPage extends PageObject {
     @FindBy(id="submit_search")
     private WebElementFacade searchButton;
 
+    @FindBy (css= ".panel:nth-child(2) > .panel-heading a")
+    private WebElementFacade menFilter;
+
+    @FindBy(css="#Men li:nth-child(1) > a")
+    private WebElementFacade tshirtFliter;
 
 
+
+
+    public void setMenFilter(){
+        menFilter.click();
+    }
+    public void setTshirtFliter(){
+        tshirtFliter.click();
+    }
 
     public void clickSearchField(){
         searchField.type("frozen tops for kids");
@@ -42,7 +55,9 @@ public class InventoryPage extends PageObject {
     public void clickSearchbutton(){
         searchButton.click();
     }
-
+    public void clickSearchFieldwithemptystring(){
+        searchField.type("");
+    }
 
     public int getInventory(){
         return inventoryItems.size();
