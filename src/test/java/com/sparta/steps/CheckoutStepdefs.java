@@ -3,10 +3,14 @@ package com.sparta.steps;
 import com.sparta.pages.*;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Managed;
 import org.junit.jupiter.api.Assertions;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 
 public class CheckoutStepdefs {
     @Managed
@@ -68,5 +72,50 @@ public class CheckoutStepdefs {
         paymentPage.enterCardExpiryMonth("01");
         paymentPage.enterCardExpiryYear("2030");
         paymentPage.submit();
+    }
+
+    @And("I click login")
+    public void iClickLogin() {
+        cartPage.toLogin();
+    }
+
+    @And("I login")
+    public void iLogin() {
+        loginPage.enterEmail("spartatester@gmail.com");
+        loginPage.enterPassword("test");
+        loginPage.clickLoginButton();
+    }
+
+    @When("I click proceed to checkout again")
+    public void iClickProceedToCheckoutAgain() {
+        homePage.openCart();
+        cartPage.proceedToCheckout();
+    }
+
+    @Given("I am on the home page and logged out")
+    public void iAmOnTheHomePageAndLoggedOut() {
+        homePage.openHomePage();
+        homePage.logout();
+        loginPage.clickHome();
+
+    }
+
+    @And("I click submit without filling details")
+    public void iClickSubmitWithoutFillingDetails() {
+        paymentPage.submit();
+    }
+
+    @Then("I should not progress to the next page")
+    public void iShouldNotProgressToTheNextPage() {
+        assertThat(homePage.getDriver().getCurrentUrl(), containsString("/payment"));
+    }
+
+    @And("I log in")
+    public void iLogIn() {
+        homePage.openHomePage();
+        homePage.logout();
+        loginPage.enterEmail("spartatester@gmail.com");
+        loginPage.enterPassword("test");
+        loginPage.clickLoginButton();
     }
 }
