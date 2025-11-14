@@ -39,6 +39,9 @@ public class InventoryPage extends PageObject {
     @FindBy(css="#Men li:nth-child(1) > a")
     private WebElementFacade tshirtFliter;
 
+    @FindBy(className ="choose")
+    private WebElementFacade viewProduct;
+
 
 
 
@@ -69,6 +72,10 @@ public class InventoryPage extends PageObject {
 
     public void setDressFliter(){
         dressFliter.click();
+    }
+
+    public void detialedProductView(){
+        viewProduct.click();
     }
 
     public void dismissPopups() {
