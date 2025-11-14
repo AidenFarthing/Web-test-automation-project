@@ -1,0 +1,119 @@
+package com.sparta.steps;
+
+import com.sparta.pages.*;
+import io.cucumber.java.PendingException;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import net.thucydides.core.annotations.Managed;
+import org.junit.jupiter.api.Assertions;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+
+public class CheckoutStepdefs {
+    @Managed
+    LoginPage loginPage;
+
+    @Managed
+    HomePage homePage;
+
+    @Managed
+    CartPage cartPage;
+
+    @Managed
+    ProductPage productPage;
+
+    @Managed
+    CheckoutPage checkoutPage;
+
+    @Managed
+    PaymentPage paymentPage;
+
+    @When("I click proceed to checkout")
+    public void iClickProceedToCheckout() {
+        productPage.clickOnCart();
+        cartPage.proceedToCheckout();
+
+    }
+
+    @Then("I should see confirmation of purchase")
+    public void iShouldSeeConfirmationOfPurchase() {
+        Assertions.assertEquals("ORDER PLACED!",paymentPage.getOrderPlacedMessage());
+        homePage.logout();
+    }
+
+    @And("I am logged in")
+    public void iAmLoggedIn() {
+        homePage.openHomePage();
+        homePage.openLogin();
+        loginPage.enterEmail("spartatester@gmail.com");
+        loginPage.enterPassword("test");
+        loginPage.clickLoginButton();
+    }
+
+    @And("have added an item to the cart")
+    public void haveAddedAnItemToTheCart() {
+        homePage.viewProduct();
+        productPage.clickAddToCartButton();
+        productPage.clickContinueShopping();
+    }
+
+    @And("I click place order")
+    public void iClickPlaceOrder() {
+        checkoutPage.clickCheckout();
+    }
+
+    @And("I enter the card details and click submit")
+    public void iEnterTheCardDetails() {
+        paymentPage.enterNameOnCard("Jane");
+        paymentPage.enterCardNumber("123456789");
+        paymentPage.enterCVC("202");
+        paymentPage.enterCardExpiryMonth("01");
+        paymentPage.enterCardExpiryYear("2030");
+        paymentPage.submit();
+    }
+
+    @And("I click login")
+    public void iClickLogin() {
+        cartPage.toLogin();
+    }
+
+    @And("I login")
+    public void iLogin() {
+        loginPage.enterEmail("spartatester@gmail.com");
+        loginPage.enterPassword("test");
+        loginPage.clickLoginButton();
+    }
+
+    @When("I click proceed to checkout again")
+    public void iClickProceedToCheckoutAgain() {
+        homePage.openCart();
+        cartPage.proceedToCheckout();
+    }
+
+    @Given("I am on the home page and logged out")
+    public void iAmOnTheHomePageAndLoggedOut() {
+        homePage.openHomePage();
+    }
+
+    @And("I click submit without filling details")
+    public void iClickSubmitWithoutFillingDetails() {
+        paymentPage.submit();
+    }
+
+    @Then("I should not progress to the next page")
+    public void iShouldNotProgressToTheNextPage() {
+        assertThat(homePage.getDriver().getCurrentUrl(), containsString("/payment"));
+        homePage.logout();
+    }
+
+    @And("I log in")
+    public void iLogIn() {
+        homePage.openHomePage();
+        loginPage.enterEmail("spartatester@gmail.com");
+        loginPage.enterPassword("test");
+        loginPage.clickLoginButton();
+    }
+}
