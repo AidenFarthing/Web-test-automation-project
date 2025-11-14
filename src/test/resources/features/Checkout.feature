@@ -35,3 +35,16 @@ Feature: Checkout
     And I click place order
     And I click submit without filling details
     Then I should not progress to the next page
+
+  @Happy
+  Scenario: Checkout by signing up and buying an item
+    Given I have successfully started signup with a unique email
+    And I am on the account information page
+    And I fill in valid account information
+    And I click Create Account
+    And I am on the home page
+    And have added an item to the cart
+    When I click proceed to checkout
+    And I click place order
+    And I enter the card details and click submit
+    Then I should see confirmation of purchase
