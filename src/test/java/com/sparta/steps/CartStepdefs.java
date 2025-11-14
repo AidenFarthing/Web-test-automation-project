@@ -92,4 +92,5 @@ public class CartStepdefs  extends PageObject {
     public void iRemoveTheItemsFromCart() {
         cartPage.cartQuantityDelete();
     }
+
 }
